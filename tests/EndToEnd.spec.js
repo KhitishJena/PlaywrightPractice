@@ -32,9 +32,9 @@ test("End to end Automation", async ({browser})=>{
     const orderId= page.locator("label.ng-star-inserted");
     const topBanner = page.locator("nav ul");
     const orderBtn = page.locator("[routerlink*='dashboard/myorders']");
-    const orderItems = page.locator("tbody tr");
-    const orderItemsId = orderItems.locator("th");
-    const viewBtn =orderItems.locator("td button.btn-primary");
+    const orderItemsRow = page.locator("tbody tr");
+    const orderItemsId = orderItemsRow.locator("th");
+    const viewBtn =orderItemsRow.locator("td button.btn-primary");
     const viewOrderPageMsg = page.locator("p.tagline");
     const viewOrderPageOrderId = page.locator("div.-main");
 
@@ -42,12 +42,13 @@ test("End to end Automation", async ({browser})=>{
     const couponCode = "rahulshettyacademy";
     const cardName = "Satish Jena";
     const loginId = "playwrightsatish@xyz.com";
+    const loginPswd = "!Lulu123";
     const thankYouMsg = " Thankyou for the order. ";
     const viewOrderPageMesg = "Thank you for Shopping With Us";
 
     await page.goto("https://rahulshettyacademy.com/client/");
     await emailBox.fill(loginId);
-    await pswdBox.fill("!Lulu123");
+    await pswdBox.fill(loginPswd);
     await loginButton.click();
    // await page.waitForLoadState("networkidle"); //Getting flaky here
     await products.last().waitFor();
@@ -142,7 +143,7 @@ test("End to end Automation", async ({browser})=>{
    
     const noOfOrderId = await orderItemsId.count();
     console.log("The number of OrderId's in Order history page: ",noOfOrderId);
-    console.log("the number of line items ",await orderItems.count());
+    console.log("the number of line items ",await orderItemsRow.count());
 
     for(let i =0;i<noOfOrderId;i++){
         if(await orderItemsId.nth(i).textContent()===orderIdTxt){
