@@ -158,5 +158,5 @@ test("End to end Automation", async ({browser})=>{
 
 
 
-    await page.pause();
+    //await page.pause();
 });
