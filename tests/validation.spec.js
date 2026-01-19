@@ -16,4 +16,15 @@ test("More validations", async({page})=>{
     page.on("dialog",dialog => dialog.accept());
     //page.on("dialog",dialog => dialog.dismiss());
 
+    await page.locator("#mousehover").hover();
+
+
+    const framesPage = page.frameLocator("#courses-iframe");
+    await framesPage.locator("li a[href*='lifetime-access']:visible").click();
+    const textContent = await framesPage.locator(".text h2").textContent();
+
+    const subcriberCount = await textContent.split(" ")[1].split(" ")[0];
+    console.log(subcriberCount);
+    await page.pause();
+
 });
